@@ -13,17 +13,17 @@
         <div class="col-md-8">
 
             <x-main-area>
-                <table class="table table-striped">
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                    </tr>
-                    @php
-                        $subtotal = 0;
-                        $shipping = 0;
-                    @endphp
-                    @if($cart)
+                @if($cart)
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                        @php
+                            $subtotal = 0;
+                            $shipping = 0;
+                        @endphp
                         @foreach($cart as $product)
                             <tr>
                                 <td>{{ ucwords($product['title']) }}</td>
@@ -32,48 +32,57 @@
                             </tr>
                             @php $subtotal += $product['price'] * $product['qty'] @endphp
                         @endforeach
-                    @else
                         <tr>
-                            <td colspan="3">No Item In Cart</td>
+                            <td></td>
+                            <td class="">
+                                <strong>Subtotal:</strong>
+                            </td>
+                            <td class="">
+                                <strong>${{ $subtotal }}</strong>
+                            </td>
                         </tr>
-                    @endif
-
-                    <tr>
-                        <td colspan="3" class="cart-subtotal">
-                            Subtotal: ${{ $subtotal }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="cart-shipping">
-                            Shipping: ${{ $shipping }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="cart-total">
-                            Total: ${{ $total = $subtotal + $shipping }}
-                        </td>
-                    </tr>
-                </table>
-                <h3>Shipping Info</h3>
-                <form action="">
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="address">
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" class="form-control" id="city" placeholder="city">
-                    </div>
-                    <div class="form-group">
-                        <label for="state">State</label>
-                        <input type="text" class="form-control" id="state" placeholder="state">
-                    </div>
-                    <div class="form-group">
-                        <label for="zip">Zip Code</label>
-                        <input type="text" class="form-control" id="zip" placeholder="zip code">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Checkout</button>
-                </form>
+                        <tr>
+                            <td></td>
+                            <td class="">
+                                <strong>Shipping:</strong>
+                            </td>
+                            <td>
+                                <strong>${{ $shipping }}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="">
+                                <strong>Total:</strong>
+                            </td>
+                            <td class="">
+                                <strong>${{ $total = $subtotal + $shipping }}</strong>
+                            </td>
+                        </tr>
+                    </table>
+                    <h3>Shipping Info</h3>
+                    <form action="">
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="address">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" placeholder="city">
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" placeholder="state">
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">Zip Code</label>
+                            <input type="text" class="form-control" id="zip" placeholder="zip code">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Checkout</button>
+                    </form>
+                @else
+                    <p>There is no item in cart.</p>
+                @endif
             </x-main-area>
 
         </div>

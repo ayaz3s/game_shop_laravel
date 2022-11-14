@@ -34,15 +34,29 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/users/register">Create account</a>
-            </li>
+            @auth
+                <li class="nav-item">
+                    <div class="nav-link" >Welcome {{ auth()->user()->name }}</div>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/register">Create account</a>
+                </li>
+            @endauth
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="email" placeholder="Enter Email" >
-            <input class="form-control mr-sm-2" type="password" placeholder="Enter password" >
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-        </form>
+        @auth
+            <form action="/users/logout" method="POST">
+                @csrf
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+        @else
+            <form action="/users/auth" method="POST" class="form-inline my-2 my-lg-0">
+                @csrf
+                <input class="form-control mr-sm-2" type="email" name="email" placeholder="Enter Email" >
+                <input class="form-control mr-sm-2" type="password" name="password" placeholder="Enter password" >
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+            </form>
+        @endauth
     </div>
 </nav>
 
