@@ -9,7 +9,10 @@
 
     <title>Game Shop</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/starter-template/">
+{{--    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/starter-template/">--}}
+
+    <!-- alpine js -->
+    <script src="//unpkg.com/alpinejs" defer></script>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap4.min.css') }}" rel="stylesheet">
@@ -46,6 +49,8 @@
 <main role="main" class="container" style="padding-top: 60px !important;">
     {{ $slot }}
 </main><!-- /.container -->
+
+<x-flash-message/>
 
 {{--footer--}}
 <footer class="row footer no-gutters">
