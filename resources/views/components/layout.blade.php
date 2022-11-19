@@ -12,7 +12,9 @@
 {{--    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/starter-template/">--}}
 
     <!-- alpine js -->
-    <script src="//unpkg.com/alpinejs" defer></script>
+{{--    <script src="//unpkg.com/alpinejs" defer></script>--}}
+{{--    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>--}}
+    <script src="{{ asset('js/alpinejs3.min.js') }}" ></script>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap4.min.css') }}" rel="stylesheet">
