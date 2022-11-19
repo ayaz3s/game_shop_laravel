@@ -34,6 +34,7 @@ Route::get('/cart/show', [CartController::class, 'show']);
 Route::post('/cart/add', [CartController::class, 'add']);
 Route::post('/cart/update', [CartController::class, 'update']);
 Route::post('/cart/empty', [CartController::class, 'empty']);
+Route::post('/cart/process', [CartController::class, 'process']);
 
 /*
  * auth middleware can only be accessed by authenticated users

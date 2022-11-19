@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
@@ -89,5 +90,48 @@ class CartController extends Controller
         Session::put('cart', $cartArr);
 
         return redirect()->back();
+    }
+
+    // cart process
+    public function process(Request $request){
+
+        $user = auth()->user();
+
+        $address = $request->get('address');
+        $city = $request->get('city');
+        $state = $request->get('state');
+        $zipcode = $request->get('zipcode');
+        $transaction_id = rand(123, 9999);
+
+        foreach ($request->get('productName') as $key => $value){
+            // get product id from form data
+            $product_id = $request->get('productID')[$key];
+            // get product model
+            $product = Product::find($product_id);
+            // get product qty from form data
+            $productQty = $request->get('productQty')[$key];
+
+            $order = [
+                'product_id' => $product_id,
+                'qty' => $productQty,
+                'price' => $product->price,
+            ];
+
+            // create order
+            // TODO before creating user need to pay
+            Order::create([
+                'product_id' => $product->id,
+                'user_id' => $user->id,
+                'transaction_id' => $transaction_id,
+                'qty' => $productQty,
+                'price' => $product->price,
+                'address' => $address,
+                'city' => $city,
+                'state' => $state,
+                'zipcode' => $zipcode
+            ]);
+        }
+
+        return redirect('/')->with('success', 'order created successfully');
     }
 }

@@ -14,7 +14,7 @@
 
             <x-main-area>
                 @if($cart)
-                    <form action="">
+                    <form action="/cart/process" method="POST">
                         <table class="table table-striped">
                             <tr>
                                 <th>Product</th>
@@ -25,7 +25,10 @@
                                 $subtotal = 0;
                                 $shipping = 0;
                             @endphp
-                            @foreach($cart as $product)
+                            @foreach($cart as $idx => $product)
+                                <input type="hidden" name="productName[{{ $idx }}]" value="{{ $product['title'] }}">
+                                <input type="hidden" name="productID[{{ $idx }}]" value="{{ $product['id'] }}">
+                                <input type="hidden" name="productQty[{{ $idx }}]" value="{{ $product['qty'] }}">
                                 <tr>
                                     <td>{{ ucwords($product['title']) }}</td>
                                     <td>{{ $product['qty'] }}</td>

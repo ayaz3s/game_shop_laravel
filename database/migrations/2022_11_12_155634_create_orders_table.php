@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreignId('product_id')
                 ->constrained()
                 ->onDelete('cascade');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onDelete('cascade');
+            $table->integer('transaction_id');
             $table->integer('qty');
             $table->float('price');
             $table->string('address');
